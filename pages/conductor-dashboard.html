@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Conductor Dashboard — CampusTransit</title>
+<link rel="stylesheet" href="../dist/output.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body class="bg-surface text-slate-800">
+
+<div id="appShell"></div>
+
+<template id="tpl-home">
+  <div class="max-w-2xl mx-auto space-y-5">
+    <div class="card card-pad bg-gradient-to-br from-navy-900 to-navy-700 text-white">
+      <p class="text-slate-300 text-sm">Morning Trip</p>
+      <h2 class="text-xl font-bold mt-1 font-mono">BUS-007</h2>
+      <div class="flex items-end gap-2 mt-3">
+        <p class="text-3xl font-bold font-mono" id="conductorCount">38</p>
+        <p class="text-sm text-slate-400 mb-1">/ 45 Boarded</p>
+      </div>
+      <div class="w-full h-2 bg-white/10 rounded-full overflow-hidden mt-3">
+        <div id="conductorProgress" class="h-full bg-success-400 transition-all duration-500" style="width:84%"></div>
+      </div>
+    </div>
+
+    <div class="card card-pad text-center py-10">
+      <div class="w-16 h-16 rounded-2xl bg-accent-50 text-accent-600 flex items-center justify-center text-2xl mx-auto mb-4">
+        <i class="fa-solid fa-qrcode"></i>
+      </div>
+      <p class="text-sm text-slate-500 mb-6">Scan a student's digital pass to mark attendance</p>
+      <button id="scanBtn" class="w-full py-5 rounded-2xl bg-accent-600 hover:bg-accent-700 active:scale-[0.98] text-white font-bold text-lg tracking-wide transition-all shadow-lg shadow-accent-600/30">
+        <i class="fa-solid fa-camera mr-2"></i>SCAN STUDENT PASS
+      </button>
+    </div>
+
+    <div class="card card-pad">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-semibold text-slate-800">Student List</h3>
+        <div class="flex gap-1.5">
+          <button data-filter="all" class="cnd-filter-btn px-2.5 py-1 rounded-full text-xs font-medium bg-accent-600 text-white">All</button>
+          <button data-filter="Boarded" class="cnd-filter-btn px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-500">Boarded</button>
+          <button data-filter="Not Boarded" class="cnd-filter-btn px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-500">Pending</button>
+        </div>
+      </div>
+      <div id="conductorStudentList" class="space-y-2"></div>
+    </div>
+  </div>
+</template>
+
+<script src="../js/mock-data.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/conductor.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Parent Dashboard — CampusTransit</title>
+<link rel="stylesheet" href="../dist/output.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body class="bg-surface text-slate-800">
+
+<div id="appShell"></div>
+
+<template id="tpl-overview">
+  <div class="space-y-6">
+    <div class="card card-pad">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold shrink-0">MU</div>
+        <div class="min-w-0">
+          <p class="text-xs text-slate-400">Your Child</p>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 truncate">Mitul Upadhyay</h2>
+          <div class="flex flex-wrap gap-3 mt-1 text-xs text-slate-500">
+            <span class="font-mono">BUS-007</span><span>Route A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6">
+      <!-- Journey tracker -->
+      <div class="lg:col-span-2 card card-pad">
+        <h3 class="font-semibold text-slate-800 mb-5">Today's Journey</h3>
+        <div id="journeyTracker" class="space-y-0"></div>
+      </div>
+
+      <!-- Live status -->
+      <div class="lg:col-span-3 card card-pad">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-slate-800">Live Bus Location</h3>
+          <span class="flex items-center gap-1.5 text-xs text-success-600 font-medium"><span class="pulse-dot bg-success-500"></span>Live</span>
+        </div>
+        <div class="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-200 mb-4">
+          <svg class="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M5,85 Q30,60 50,50 T95,15" stroke="#94a3b8" stroke-width="0.8" fill="none" stroke-dasharray="1.5,1.5"/>
+          </svg>
+          <div class="absolute -translate-x-1/2 -translate-y-1/2" style="left:40%; top:60%;">
+            <div class="w-8 h-8 rounded-full bg-success-500 flex items-center justify-center shadow-lg ring-4 ring-success-500/20"><i class="fa-solid fa-bus text-white text-xs"></i></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center mb-5">
+          <div class="bg-slate-50 rounded-lg py-3"><p class="text-base font-bold font-mono text-slate-800">08 min</p><p class="text-[11px] text-slate-400">ETA</p></div>
+          <div class="bg-slate-50 rounded-lg py-3"><p class="text-base font-bold text-slate-800">07:42 AM</p><p class="text-[11px] text-slate-400">Boarding</p></div>
+          <div class="bg-slate-50 rounded-lg py-3"><p class="text-base font-bold text-slate-800">08:24 AM</p><p class="text-[11px] text-slate-400">Arrival</p></div>
+          <div class="bg-slate-50 rounded-lg py-3"><p class="text-base font-bold text-emerald-600">On Time</p><p class="text-[11px] text-slate-400">Delay Status</p></div>
+        </div>
+        <div class="flex items-center justify-between bg-accent-50 rounded-xl p-3.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-accent-600 text-white flex items-center justify-center text-xs font-bold">RS</div>
+            <div><p class="text-sm font-medium text-slate-800">Rahul Sharma</p><p class="text-xs text-slate-400">Driver, Bus 007</p></div>
+          </div>
+          <a href="tel:+919876543210" class="btn-secondary btn-sm !bg-white"><i class="fa-solid fa-phone"></i> Call</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="card card-pad">
+      <h3 class="font-semibold text-slate-800 mb-4">Notification Timeline</h3>
+      <div id="parentEventsList" class="space-y-4"></div>
+    </div>
+  </div>
+</template>
+
+<script src="../js/mock-data.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/parent.js"></script>
+</body>
+</html>
