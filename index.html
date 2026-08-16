@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>CampusTransit — College Bus Management System</title>
+<link rel="stylesheet" href="dist/output.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body class="auth-shell">
+
+<div class="auth-grid-overlay"></div>
+
+<div class="auth-layout">
+
+  <!-- Left: Branding panel -->
+  <div class="auth-visual">
+    <div class="auth-logo">
+      <div class="auth-logo-mark">CT</div>
+      <span class="auth-logo-text">CampusTransit<small>College Transport Platform</small></span>
+    </div>
+
+    <div>
+      <span class="auth-eyebrow">Fleet Operations Platform</span>
+      <h1 class="auth-heading">Every bus, every student, one live view.</h1>
+      <p class="auth-subtext">
+        Real-time tracking, QR attendance, and route intelligence for university
+        transportation — built for admins, students, parents, drivers and conductors alike.
+      </p>
+
+      <div class="auth-stats-row">
+        <div>
+          <p class="auth-stat-value">24</p>
+          <p class="auth-stat-label">Buses live</p>
+        </div>
+        <div class="auth-stat-divider"></div>
+        <div>
+          <p class="auth-stat-value">3.2k</p>
+          <p class="auth-stat-label">Students routed</p>
+        </div>
+        <div class="auth-stat-divider"></div>
+        <div>
+          <p class="auth-stat-value">99.4%</p>
+          <p class="auth-stat-label">On-time rate</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-xs text-slate-600">© 2026 CampusTransit. A university fleet management system.</p>
+  </div>
+
+  <!-- Right: Login card -->
+  <div class="auth-form-col">
+    <div class="auth-form-wrap">
+
+      <div class="lg:hidden auth-logo justify-center mb-8">
+        <div class="auth-logo-mark">CT</div>
+        <span class="auth-logo-text">CampusTransit</span>
+      </div>
+
+      <div class="auth-card">
+        <div class="auth-card-head">
+          <h2 class="auth-card-title">Sign in</h2>
+          <span class="auth-secure-pill"><i class="fa-solid fa-shield-halved"></i> Secure</span>
+        </div>
+        <p class="auth-card-sub">Select your role to continue</p>
+
+        <!-- Role selector -->
+        <div id="roleGrid" class="role-grid">
+          <!-- injected by auth.js -->
+        </div>
+
+        <form id="loginForm">
+          <div class="auth-field">
+            <label class="auth-label" for="email">Email / ID</label>
+            <input id="email" type="text" class="auth-input" placeholder="you@college.edu" required />
+          </div>
+          <div class="auth-field">
+            <label class="auth-label" for="password">Password</label>
+            <div class="relative">
+              <input id="password" type="password" class="auth-input pr-10" placeholder="••••••••" required />
+              <button type="button" id="togglePw" class="auth-input-icon-btn">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-row-between">
+            <label class="auth-checkbox-label">
+              <input type="checkbox" class="rounded border-white/20 bg-white/5 text-accent-500 focus:ring-accent-500/30" />
+              Remember me
+            </label>
+            <a href="#" class="auth-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="auth-submit-btn">
+            Sign in as <span id="selectedRoleLabel">Admin</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </form>
+
+        <div id="loginError" class="auth-error hidden"></div>
+
+        <div class="auth-demo-block">
+          <p class="auth-demo-label">Demo credentials (any password works):</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="auth-demo-chip">admin@college.edu</span>
+            <span class="auth-demo-chip">student@college.edu</span>
+            <span class="auth-demo-chip">parent@college.edu</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="auth-footer">Protected by role-based access control · v1.0.0</p>
+    </div>
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
