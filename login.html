@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign in to BusFlow — college transportation management system." />
+  <meta name="theme-color" content="#06070a" />
+  <title>Sign in · BusFlow</title>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="dist/output.css" />
+</head>
+
+<body class="min-h-screen bg-void">
+  <a class="sr-only-focusable" href="#loginForm">Skip to sign-in form</a>
+
+  <main class="grid min-h-screen lg:grid-cols-[1.05fr_1fr]">
+    <!-- ── brand / visual side ── -->
+    <section class="relative hidden overflow-hidden border-r border-line lg:block">
+      <div class="absolute inset-0 bg-grid opacity-70" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute -left-40 top-1/4 h-[560px] w-[560px] rounded-full bg-accent/10 blur-[130px]" aria-hidden="true"></div>
+
+      <div class="relative flex h-full flex-col p-10 xl:p-14">
+        <a class="flex items-center gap-2.5" href="index.html">
+          <span id="brandLogo"></span>
+          <span class="text-[15px] font-semibold tracking-[-0.02em] text-hi">BusFlow</span>
+        </a>
+
+        <div class="mt-14 max-w-md">
+          <p class="kicker"><span class="dot"></span>Transportation control</p>
+          <h1 class="display mt-4 text-4xl leading-[1.05] xl:text-[2.9rem]">
+            Your campus.<br />Your route.<br /><span class="text-gradient">Always connected.</span>
+          </h1>
+          <p class="mt-5 max-w-sm text-sm leading-relaxed text-mute">
+            One live network shared by students, parents, drivers, conductors and administrators.
+          </p>
+        </div>
+
+        <div class="relative mt-8 flex-1 overflow-hidden rounded-2xl border border-line bg-panel/50">
+          <div class="flex items-center justify-between border-b border-line px-4 py-2.5">
+            <div class="flex items-center gap-2.5">
+              <span class="live-dot"></span>
+              <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-mid">Network · live</p>
+            </div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-faint" data-clock>07:42 AM</p>
+          </div>
+          <div id="loginMap" class="h-full min-h-[240px] w-full"></div>
+        </div>
+
+        <dl class="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
+          <div class="bg-panel px-4 py-3.5"><dt class="stat-label">Buses</dt>
+            <dd class="mt-1 font-mono text-lg text-hi tabular-nums" data-count="12" data-pad="2">00</dd></div>
+          <div class="bg-panel px-4 py-3.5"><dt class="stat-label">Routes</dt>
+            <dd class="mt-1 font-mono text-lg text-hi tabular-nums" data-count="38">0</dd></div>
+          <div class="bg-panel px-4 py-3.5"><dt class="stat-label">Students</dt>
+            <dd class="mt-1 font-mono text-lg text-hi tabular-nums" data-count="1284">0</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ── form side ── -->
+    <section class="flex items-center justify-center px-5 py-12 sm:px-10">
+      <div class="w-full max-w-md">
+        <a class="mb-10 inline-flex items-center gap-2.5 lg:hidden" href="index.html">
+          <span id="brandLogoMobile"></span>
+          <span class="text-[15px] font-semibold tracking-[-0.02em] text-hi">BusFlow</span>
+        </a>
+
+        <p class="kicker"><span class="dot"></span>Secure sign in</p>
+        <h2 class="display mt-3 text-3xl">Welcome back</h2>
+        <p class="mt-2 text-sm text-mute">Choose a role to enter the BusFlow demo environment.</p>
+
+        <!-- role selector -->
+        <div class="mt-7">
+          <p class="field-label">Select role</p>
+          <div class="grid grid-cols-2 gap-2 sm:grid-cols-3" id="roleSelect" role="radiogroup" aria-label="Select role"></div>
+        </div>
+
+        <form class="mt-6 space-y-4" id="loginForm" novalidate>
+          <div>
+            <label class="field-label" for="email">Email or ID</label>
+            <input class="input-field font-mono text-[13px]" id="email" name="email" type="text" autocomplete="username"
+                   value="mitul.upadhyay@gehu.ac.in" aria-describedby="emailHint" />
+            <p class="mt-1.5 text-[11px] text-faint" id="emailHint">Pre-filled for the demo — any value works.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label class="field-label" for="password">Password</label>
+              <a class="font-mono text-[10px] uppercase tracking-[0.14em] text-mute transition-colors hover:text-mid" href="#">Forgot?</a>
+            </div>
+            <div class="relative">
+              <input class="input-field pr-11 font-mono text-[13px]" id="password" name="password" type="password"
+                     autocomplete="current-password" value="busflow2026" />
+              <button class="absolute right-1.5 top-1/2 -translate-y-1/2 btn-icon h-8 w-8 border-transparent bg-transparent"
+                      type="button" id="togglePw" aria-label="Show password">
+                <i data-icon="eye" data-icon-class="h-4 w-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1">
+            <label class="flex cursor-pointer items-center gap-2.5 text-xs text-mid">
+              <input class="h-4 w-4 rounded border-line bg-panel-2 accent-[#22d3ee]" type="checkbox" checked />
+              Keep me signed in
+            </label>
+            <span class="mono-label">2FA ready</span>
+          </div>
+
+          <button class="btn-primary btn-block btn-lg" type="submit" id="submitBtn">
+            <span>Sign in as Student</span>
+            <i data-icon="arrowRight" data-icon-class="h-4 w-4"></i>
+          </button>
+        </form>
+
+        <div class="my-7 flex items-center gap-4">
+          <span class="h-px flex-1 bg-line"></span>
+          <span class="mono-label">Or jump straight in</span>
+          <span class="h-px flex-1 bg-line"></span>
+        </div>
+
+        <div class="grid gap-2" id="quickLinks"></div>
+
+        <p class="mt-8 text-center text-xs text-faint">
+          Prototype build · mock authentication · no data leaves this device.
+          <a class="text-mute underline decoration-line underline-offset-4 transition-colors hover:text-hi" href="index.html">Back to site</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/qr.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/fleetmap.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

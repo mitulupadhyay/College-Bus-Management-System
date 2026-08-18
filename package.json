@@ -1,17 +1,16 @@
 {
-  "name": "college-bus-management",
+  "name": "busflow",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "BusFlow — College Transportation Management System (frontend prototype: HTML + Tailwind CLI + vanilla JS)",
   "scripts": {
-    "build": "tailwindcss -i ./css/input.css -o ./dist/output.css --minify",
-    "watch": "tailwindcss -i ./css/input.css -o ./dist/output.css --watch"
+    "dev": "npx @tailwindcss/cli -i ./css/input.css -o ./dist/output.css --watch",
+    "build": "npx @tailwindcss/cli -i ./css/input.css -o ./dist/output.css --minify",
+    "serve": "npx serve ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["tailwindcss", "vanilla-js", "prototype", "college-project", "transportation"],
+  "license": "MIT",
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.3",
-    "tailwindcss": "^4.3.3"
+    "@tailwindcss/cli": "^4.3.3"
   }
 }

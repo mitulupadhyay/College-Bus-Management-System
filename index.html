@@ -1,121 +1,551 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>CampusTransit — College Bus Management System</title>
-<link rel="stylesheet" href="dist/output.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BusFlow — a digital transportation platform connecting students, parents, drivers, conductors and college administrators." />
+  <meta name="theme-color" content="#06070a" />
+  <title>BusFlow — Smart College Transportation</title>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="dist/output.css" />
 </head>
-<body class="auth-shell">
 
-<div class="auth-grid-overlay"></div>
+<body class="min-h-screen bg-void text-hi">
+  <a class="sr-only-focusable" href="#main">Skip to content</a>
 
-<div class="auth-layout">
+  <!-- ══════════════════ NAVBAR ══════════════════ -->
+  <header id="siteNav" class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-all duration-500">
+    <div class="mx-auto flex h-16 max-w-7xl items-center gap-6 px-5 sm:px-8">
+      <a class="flex items-center gap-2.5" href="index.html" aria-label="BusFlow home">
+        <span id="navLogo"></span>
+        <span class="text-[15px] font-semibold tracking-[-0.02em]">BusFlow</span>
+        <span class="hidden rounded-md border border-line bg-white/[0.03] px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-mute sm:inline">v1.0</span>
+      </a>
 
-  <!-- Left: Branding panel -->
-  <div class="auth-visual">
-    <div class="auth-logo">
-      <div class="auth-logo-mark">CT</div>
-      <span class="auth-logo-text">CampusTransit<small>College Transport Platform</small></span>
-    </div>
+      <nav class="ml-auto hidden items-center gap-1 md:flex" aria-label="Sections">
+        <a class="nav-item" href="#fleet">Fleet</a>
+        <a class="nav-item" href="#how">How it works</a>
+        <a class="nav-item" href="#roles">Roles</a>
+        <a class="nav-item" href="#tracking">Tracking</a>
+        <a class="nav-item" href="#pass">Bus pass</a>
+        <a class="nav-item" href="#control">Control center</a>
+      </nav>
 
-    <div>
-      <span class="auth-eyebrow">Fleet Operations Platform</span>
-      <h1 class="auth-heading">Every bus, every student, one live view.</h1>
-      <p class="auth-subtext">
-        Real-time tracking, QR attendance, and route intelligence for university
-        transportation — built for admins, students, parents, drivers and conductors alike.
-      </p>
-
-      <div class="auth-stats-row">
-        <div>
-          <p class="auth-stat-value">24</p>
-          <p class="auth-stat-label">Buses live</p>
-        </div>
-        <div class="auth-stat-divider"></div>
-        <div>
-          <p class="auth-stat-value">3.2k</p>
-          <p class="auth-stat-label">Students routed</p>
-        </div>
-        <div class="auth-stat-divider"></div>
-        <div>
-          <p class="auth-stat-value">99.4%</p>
-          <p class="auth-stat-label">On-time rate</p>
-        </div>
+      <div class="ml-auto flex items-center gap-2 md:ml-0">
+        <a class="btn-secondary btn-sm hidden sm:inline-flex" href="login.html">Sign In</a>
+        <a class="btn-primary btn-sm" href="pages/admin.html">
+          Explore BusFlow
+          <i data-icon="arrowRight" data-icon-class="h-3.5 w-3.5"></i>
+        </a>
+        <button class="btn-icon md:hidden" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <i data-icon="menu" data-icon-class="h-4.5 w-4.5"></i>
+        </button>
       </div>
     </div>
 
-    <p class="text-xs text-slate-600">© 2026 CampusTransit. A university fleet management system.</p>
-  </div>
+    <!-- mobile menu -->
+    <div id="mobileMenu" class="hidden border-t border-line bg-ink/95 backdrop-blur-xl md:hidden">
+      <nav class="mx-auto grid max-w-7xl gap-1 px-5 py-4" aria-label="Mobile">
+        <a class="sidebar-item" href="#fleet">Live fleet</a>
+        <a class="sidebar-item" href="#how">How it works</a>
+        <a class="sidebar-item" href="#roles">Five roles</a>
+        <a class="sidebar-item" href="#tracking">Live tracking</a>
+        <a class="sidebar-item" href="#pass">Digital pass</a>
+        <a class="sidebar-item" href="#control">Control center</a>
+        <a class="btn-secondary mt-2" href="login.html">Sign In</a>
+      </nav>
+    </div>
+  </header>
 
-  <!-- Right: Login card -->
-  <div class="auth-form-col">
-    <div class="auth-form-wrap">
+  <main id="main">
+    <!-- ══════════════════ 1 · HERO ══════════════════ -->
+    <section class="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pb-24">
+      <div class="pointer-events-none absolute inset-0 bg-grid mask-fade-b opacity-70" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-accent/10 blur-[140px]" aria-hidden="true"></div>
 
-      <div class="lg:hidden auth-logo justify-center mb-8">
-        <div class="auth-logo-mark">CT</div>
-        <span class="auth-logo-text">CampusTransit</span>
-      </div>
-
-      <div class="auth-card">
-        <div class="auth-card-head">
-          <h2 class="auth-card-title">Sign in</h2>
-          <span class="auth-secure-pill"><i class="fa-solid fa-shield-halved"></i> Secure</span>
-        </div>
-        <p class="auth-card-sub">Select your role to continue</p>
-
-        <!-- Role selector -->
-        <div id="roleGrid" class="role-grid">
-          <!-- injected by auth.js -->
-        </div>
-
-        <form id="loginForm">
-          <div class="auth-field">
-            <label class="auth-label" for="email">Email / ID</label>
-            <input id="email" type="text" class="auth-input" placeholder="you@college.edu" required />
+      <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+        <!-- copy -->
+        <div>
+          <div class="inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] py-1.5 pl-1.5 pr-3.5" data-reveal>
+            <span class="rounded-full bg-accent/15 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">Live</span>
+            <span class="text-xs text-mid">Fleet telemetry streaming · <span class="font-mono" data-clock>07:42 AM</span></span>
           </div>
-          <div class="auth-field">
-            <label class="auth-label" for="password">Password</label>
+
+          <h1 class="display mt-6 text-[clamp(2.75rem,7vw,4.5rem)] leading-[0.98]" data-reveal data-reveal-delay="60">
+            <span class="block font-mono text-[0.28em] font-normal uppercase tracking-[0.42em] text-accent">BusFlow</span>
+            <span class="mt-4 block">Smart College</span>
+            <span class="block text-gradient">Transportation</span>
+          </h1>
+
+          <p class="mt-6 max-w-md text-[15px] leading-relaxed text-mid" data-reveal data-reveal-delay="120">
+            Your campus. Your route. Always connected. A digital transportation platform connecting
+            students, parents, drivers, conductors and college administrators — on one live network.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-3" data-reveal data-reveal-delay="180">
+            <a class="btn-primary btn-lg" href="pages/admin.html">
+              Explore BusFlow
+              <i data-icon="arrowRight" data-icon-class="h-4 w-4"></i>
+            </a>
+            <a class="btn-secondary btn-lg" href="login.html">
+              <i data-icon="lock" data-icon-class="h-4 w-4"></i>
+              Sign In
+            </a>
+          </div>
+
+          <dl class="mt-10 grid max-w-md grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line" data-reveal data-reveal-delay="220">
+            <div class="bg-panel px-4 py-3.5">
+              <dt class="stat-label">Buses</dt>
+              <dd class="mt-1 font-mono text-xl text-hi tabular-nums" data-count="12" data-pad="2">00</dd>
+            </div>
+            <div class="bg-panel px-4 py-3.5">
+              <dt class="stat-label">Students</dt>
+              <dd class="mt-1 font-mono text-xl text-hi tabular-nums" data-count="1284">0</dd>
+            </div>
+            <div class="bg-panel px-4 py-3.5">
+              <dt class="stat-label">On-time</dt>
+              <dd class="mt-1 font-mono text-xl text-hi tabular-nums" data-count="91.2" data-decimals="1" data-suffix="%">0%</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- hero network visual -->
+        <div class="relative" data-reveal data-reveal-delay="120">
+          <div class="card overflow-hidden">
+            <div class="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
+              <div class="flex items-center gap-2.5">
+                <span class="live-dot"></span>
+                <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-mid">Network Control · Bhimtal Grid</p>
+              </div>
+              <p class="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-faint sm:block">SVG · no map API</p>
+            </div>
+
             <div class="relative">
-              <input id="password" type="password" class="auth-input pr-10" placeholder="••••••••" required />
-              <button type="button" id="togglePw" class="auth-input-icon-btn">
-                <i class="fa-regular fa-eye"></i>
-              </button>
+              <div id="heroMap" class="aspect-[16/11] w-full bg-[radial-gradient(120%_90%_at_60%_40%,rgba(34,211,238,0.07),transparent_70%)]"></div>
+
+              <!-- floating readout -->
+              <div class="pointer-events-none absolute left-4 top-4 hidden w-44 rounded-xl border border-line-2 bg-ink/85 p-3 backdrop-blur-xl sm:block">
+                <p class="mono-label">Active route</p>
+                <p class="mt-1 text-sm font-medium text-hi" id="heroRouteName">Route A</p>
+                <div class="mt-3 space-y-1.5" id="heroRouteMeta"></div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-px border-t border-line bg-line" id="heroStats"></div>
+          </div>
+
+          <p class="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
+            Click a bus marker to inspect its telemetry
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 2 · LIVE FLEET PREVIEW ══════════════════ -->
+    <section id="fleet" class="border-t border-line py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+          <div>
+            <p class="kicker"><span class="dot"></span>Live fleet preview</p>
+            <h2 class="display mt-3 text-3xl sm:text-4xl">The whole fleet, one glance.</h2>
+            <p class="section-sub max-w-lg">Every bus reports position, occupancy and delay. Status changes propagate to
+              students, parents and the control center within the same second.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="btn-secondary btn-sm" id="simToggle" aria-pressed="true">
+              <i data-icon="activity" data-icon-class="h-3.5 w-3.5"></i><span>Pause simulation</span>
+            </button>
+            <a class="btn-ghost btn-sm" href="pages/admin.html">Open control center
+              <i data-icon="arrowUpRight" data-icon-class="h-3.5 w-3.5"></i></a>
+          </div>
+        </div>
+
+        <div id="fleetPreview" class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 3 · HOW BUSFLOW WORKS ══════════════════ -->
+    <section id="how" class="border-t border-line bg-ink/40 py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="max-w-2xl" data-reveal>
+          <p class="kicker"><span class="dot"></span>How BusFlow works</p>
+          <h2 class="display mt-3 text-3xl sm:text-4xl">Four steps from boarding to insight.</h2>
+        </div>
+
+        <ol class="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-4">
+          <li class="group bg-panel p-6" data-reveal data-reveal-delay="0">
+            <span class="mono-label">Step 01</span>
+            <span class="mt-4 flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-accent">
+              <i data-icon="qr" data-icon-class="h-5 w-5"></i></span>
+            <h3 class="mt-4 text-base font-semibold">Scan the pass</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mute">The conductor scans a student's digital pass at the stop. Boarding is
+              recorded against the trip in one tap.</p>
+          </li>
+          <li class="group bg-panel p-6" data-reveal data-reveal-delay="80">
+            <span class="mono-label">Step 02</span>
+            <span class="mt-4 flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-accent">
+              <i data-icon="radar" data-icon-class="h-5 w-5"></i></span>
+            <h3 class="mt-4 text-base font-semibold">Stream telemetry</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mute">Position, speed and occupancy stream to the network graph, recalculating
+              ETA for every downstream stop.</p>
+          </li>
+          <li class="group bg-panel p-6" data-reveal data-reveal-delay="160">
+            <span class="mono-label">Step 03</span>
+            <span class="mt-4 flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-accent">
+              <i data-icon="route" data-icon-class="h-5 w-5"></i></span>
+            <h3 class="mt-4 text-base font-semibold">Route intelligence</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mute">The engine re-runs shortest-path costs across the stop graph and flags
+              delays before they cascade.</p>
+          </li>
+          <li class="group bg-panel p-6" data-reveal data-reveal-delay="240">
+            <span class="mono-label">Step 04</span>
+            <span class="mt-4 flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/[0.03] text-accent">
+              <i data-icon="bell" data-icon-class="h-5 w-5"></i></span>
+            <h3 class="mt-4 text-base font-semibold">Notify everyone</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mute">Parents, students and administrators receive the same event from a single
+              queue — no duplicated truth.</p>
+          </li>
+        </ol>
+
+        <div class="mt-8 flex flex-wrap items-center gap-2.5" data-reveal>
+          <span class="chip"><span class="font-mono text-[10px] text-accent">GRAPH</span> Stop network</span>
+          <span class="chip"><span class="font-mono text-[10px] text-accent">DIJKSTRA</span> Shortest route</span>
+          <span class="chip"><span class="font-mono text-[10px] text-accent">HASH MAP</span> O(1) student lookup</span>
+          <span class="chip"><span class="font-mono text-[10px] text-accent">QUEUE</span> Notification events</span>
+          <span class="chip"><span class="font-mono text-[10px] text-accent">SORT</span> Attendance reports</span>
+          <span class="chip text-mute">Backed by a C++ OOP engine</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 4 · FIVE USER ROLES ══════════════════ -->
+    <section id="roles" class="border-t border-line py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+          <div class="max-w-2xl">
+            <p class="kicker"><span class="dot"></span>Five secure roles</p>
+            <h2 class="display mt-3 text-3xl sm:text-4xl">One platform, five points of view.</h2>
+            <p class="section-sub">Every role sees only what it needs — and every action they take updates the same shared state.</p>
+          </div>
+          <a class="btn-secondary btn-sm" href="login.html">Try a role
+            <i data-icon="arrowRight" data-icon-class="h-3.5 w-3.5"></i></a>
+        </div>
+
+        <div id="roleGrid" class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 5 · QR ATTENDANCE WORKFLOW ══════════════════ -->
+    <section id="attendance" class="border-t border-line bg-ink/40 py-20 sm:py-24">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
+        <div data-reveal>
+          <p class="kicker"><span class="dot"></span>QR attendance</p>
+          <h2 class="display mt-3 text-3xl sm:text-4xl">Boarding recorded in under a second.</h2>
+          <p class="section-sub max-w-lg">The conductor scans, the system verifies the pass against the trip manifest, and the
+            boarding event fans out to attendance, occupancy and the parent's phone.</p>
+
+          <ul class="mt-8 space-y-4">
+            <li class="flex gap-3.5">
+              <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-ok/30 bg-ok/10 text-ok">
+                <i data-icon="check" data-icon-class="h-3.5 w-3.5"></i></span>
+              <p class="text-sm leading-relaxed text-mid"><span class="font-medium text-hi">Pass verification.</span>
+                Expired or wrong-route passes are rejected at the door with a clear reason.</p>
+            </li>
+            <li class="flex gap-3.5">
+              <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-ok/30 bg-ok/10 text-ok">
+                <i data-icon="check" data-icon-class="h-3.5 w-3.5"></i></span>
+              <p class="text-sm leading-relaxed text-mid"><span class="font-medium text-hi">Live occupancy.</span>
+                Seat count updates on the driver console and in the control center instantly.</p>
+            </li>
+            <li class="flex gap-3.5">
+              <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-ok/30 bg-ok/10 text-ok">
+                <i data-icon="check" data-icon-class="h-3.5 w-3.5"></i></span>
+              <p class="text-sm leading-relaxed text-mid"><span class="font-medium text-hi">Parent notification.</span>
+                "Mitul boarded BUS-07 at Bhimtal Market · 07:42 AM" — sent automatically.</p>
+            </li>
+          </ul>
+
+          <a class="btn-secondary mt-8" href="pages/conductor.html">
+            <i data-icon="scan" data-icon-class="h-4 w-4"></i>
+            Open conductor scanner
+          </a>
+        </div>
+
+        <div class="card overflow-hidden" data-reveal data-reveal-delay="100">
+          <div class="panel-head">
+            <div>
+              <h3 class="text-sm font-semibold">Scanner simulation</h3>
+              <p class="mono-label mt-1">BUS-07 · Route A · Morning trip</p>
+            </div>
+            <span class="status-badge status-running"><span class="dot"></span>Online</span>
+          </div>
+          <div class="p-6" id="scanDemo"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 6 · LIVE TRACKING ══════════════════ -->
+    <section id="tracking" class="border-t border-line py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="max-w-2xl" data-reveal>
+          <p class="kicker"><span class="dot"></span>Live tracking</p>
+          <h2 class="display mt-3 text-3xl sm:text-4xl">Follow a single bus, stop by stop.</h2>
+          <p class="section-sub">Students see their own bus isolated on the network with a running ETA, next stop and delay state.</p>
+        </div>
+
+        <div class="mt-10 grid gap-4 lg:grid-cols-[1.35fr_1fr]">
+          <div class="card overflow-hidden" data-reveal>
+            <div class="panel-head">
+              <div class="flex items-center gap-2.5">
+                <span class="live-dot"></span>
+                <h3 class="text-sm font-semibold">BUS-07 · Route A</h3>
+              </div>
+              <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-mute">
+                <span>Refresh 2.6s</span><span class="h-1 w-1 rounded-full bg-line-2"></span><span data-clock>07:42 AM</span>
+              </div>
+            </div>
+            <div id="trackMap" class="aspect-[16/10] w-full"></div>
+          </div>
+
+          <div class="card card-pad" data-reveal data-reveal-delay="100">
+            <h3 class="text-sm font-semibold">Journey timeline</h3>
+            <p class="mono-label mt-1">Route A · 5 stops · 18.4 km</p>
+            <div class="mt-6" id="trackTimeline"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 7 · SMART ROUTES ══════════════════ -->
+    <section id="routes" class="border-t border-line bg-ink/40 py-20 sm:py-24">
+      <div class="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.15fr] lg:items-center">
+        <div data-reveal>
+          <p class="kicker"><span class="dot"></span>Smart routes</p>
+          <h2 class="display mt-3 text-3xl sm:text-4xl">Routes that recalculate themselves.</h2>
+          <p class="section-sub max-w-lg">Stops form a weighted graph. When a segment slows down, the engine recomputes the
+            cheapest path to campus and republishes ETAs for every affected student.</p>
+
+          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-xl border border-line bg-panel/70 p-4">
+              <p class="mono-label">Shortest path</p>
+              <p class="mt-2 font-mono text-lg text-hi">18.4 km</p>
+              <p class="mt-1 text-xs text-mute">Bhimtal Depot → Campus</p>
+            </div>
+            <div class="rounded-xl border border-line bg-panel/70 p-4">
+              <p class="mono-label">Compute time</p>
+              <p class="mt-2 font-mono text-lg text-accent">4.2 ms</p>
+              <p class="mt-1 text-xs text-mute">Dijkstra · 38 nodes</p>
             </div>
           </div>
+        </div>
 
-          <div class="auth-row-between">
-            <label class="auth-checkbox-label">
-              <input type="checkbox" class="rounded border-white/20 bg-white/5 text-accent-500 focus:ring-accent-500/30" />
-              Remember me
-            </label>
-            <a href="#" class="auth-link">Forgot password?</a>
+        <div class="card card-pad" data-reveal data-reveal-delay="100">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h3 class="text-sm font-semibold">Route optimiser</h3>
+              <p class="mono-label mt-1">Select a corridor</p>
+            </div>
+            <button class="btn-secondary btn-sm" id="optimiseBtn">
+              <i data-icon="zap" data-icon-class="h-3.5 w-3.5"></i>Optimise
+            </button>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-1.5" id="routeTabs" role="tablist" aria-label="Routes"></div>
+          <div class="mt-6" id="routePreview"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 8 · DIGITAL BUS PASS ══════════════════ -->
+    <section id="pass" class="border-t border-line py-20 sm:py-24">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
+        <div class="order-2 lg:order-1" data-reveal>
+          <p class="kicker"><span class="dot"></span>Digital bus pass</p>
+          <h2 class="display mt-3 text-3xl sm:text-4xl">The pass lives on the phone.</h2>
+          <p class="section-sub max-w-lg">Issued per academic year, bound to a route, revocable in one click. No printing, no
+            laminating, no lost cards halfway up the hill.</p>
+
+          <dl class="mt-8 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
+            <div class="bg-panel px-4 py-3.5"><dt class="stat-label">Issued</dt>
+              <dd class="mt-1 font-mono text-lg tabular-nums" data-count="1284">0</dd></div>
+            <div class="bg-panel px-4 py-3.5"><dt class="stat-label">Active</dt>
+              <dd class="mt-1 font-mono text-lg text-ok tabular-nums" data-count="1246">0</dd></div>
+            <div class="bg-panel px-4 py-3.5"><dt class="stat-label">Expired</dt>
+              <dd class="mt-1 font-mono text-lg text-warn tabular-nums" data-count="38" data-pad="2">00</dd></div>
+          </dl>
+
+          <a class="btn-secondary mt-8" href="pages/student.html">
+            <i data-icon="id" data-icon-class="h-4 w-4"></i>View student wallet
+          </a>
+        </div>
+
+        <div class="order-1 flex justify-center lg:order-2" data-reveal data-reveal-delay="100">
+          <div id="passPreview" class="w-full max-w-sm"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 9 · PARENT NOTIFICATIONS ══════════════════ -->
+    <section id="parents" class="border-t border-line bg-ink/40 py-20 sm:py-24">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
+        <div data-reveal>
+          <p class="kicker"><span class="dot"></span>Parent notifications</p>
+          <h2 class="display mt-3 text-3xl sm:text-4xl">Peace of mind, delivered on schedule.</h2>
+          <p class="section-sub max-w-lg">Parents get the four moments that matter — boarded, departed, approaching, arrived —
+            plus an immediate alert if the bus is delayed or an SOS is raised.</p>
+
+          <div class="mt-8 flex flex-wrap gap-2.5">
+            <span class="chip"><span class="dot text-ok"></span>Boarding</span>
+            <span class="chip"><span class="dot text-accent"></span>Arrival</span>
+            <span class="chip"><span class="dot text-warn"></span>Delay</span>
+            <span class="chip"><span class="dot text-bad"></span>Emergency</span>
           </div>
 
-          <button type="submit" class="auth-submit-btn">
-            Sign in as <span id="selectedRoleLabel">Admin</span>
-            <i class="fa-solid fa-arrow-right text-xs"></i>
-          </button>
-        </form>
+          <a class="btn-secondary mt-8" href="pages/parent.html">
+            <i data-icon="users" data-icon-class="h-4 w-4"></i>Open parent view
+          </a>
+        </div>
 
-        <div id="loginError" class="auth-error hidden"></div>
-
-        <div class="auth-demo-block">
-          <p class="auth-demo-label">Demo credentials (any password works):</p>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="auth-demo-chip">admin@college.edu</span>
-            <span class="auth-demo-chip">student@college.edu</span>
-            <span class="auth-demo-chip">parent@college.edu</span>
+        <div data-reveal data-reveal-delay="100">
+          <div class="mx-auto w-full max-w-sm rounded-[2rem] border border-line-2 bg-ink p-3 shadow-[var(--shadow-pop)]">
+            <div class="rounded-[1.5rem] border border-line bg-panel px-4 pb-5 pt-4">
+              <div class="mx-auto mb-4 h-1 w-16 rounded-full bg-line-2"></div>
+              <div class="flex items-center justify-between">
+                <p class="mono-label">Today</p>
+                <p class="mono-label" data-clock>07:42 AM</p>
+              </div>
+              <div class="mt-3 space-y-2.5" id="parentFeed"></div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <p class="auth-footer">Protected by role-based access control · v1.0.0</p>
+    <!-- ══════════════════ 10 · ADMIN CONTROL CENTER ══════════════════ -->
+    <section id="control" class="border-t border-line py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
+          <div class="max-w-2xl">
+            <p class="kicker"><span class="dot"></span>Admin control center</p>
+            <h2 class="display mt-3 text-3xl sm:text-4xl">An operations room, not a spreadsheet.</h2>
+            <p class="section-sub">Fleet, routes, students, attendance, complaints and reports — with the live network at the centre.</p>
+          </div>
+          <a class="btn-primary" href="pages/admin.html">Open the dashboard
+            <i data-icon="arrowRight" data-icon-class="h-4 w-4"></i></a>
+        </div>
+
+        <div class="mt-10 overflow-hidden rounded-2xl border border-line bg-panel/70 p-2 shadow-[var(--shadow-pop)]" data-reveal data-reveal-delay="80">
+          <div class="flex items-center gap-2 px-3 py-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-bad/70"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-warn/70"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-ok/70"></span>
+            <span class="ml-3 font-mono text-[10px] uppercase tracking-[0.16em] text-faint">busflow.app/admin/live</span>
+          </div>
+          <div class="grid gap-2 rounded-xl border border-line bg-ink p-2 lg:grid-cols-[240px_1fr]">
+            <aside class="hidden rounded-lg border border-line bg-panel/60 p-3 lg:block">
+              <div class="flex items-center gap-2 px-2 pb-3">
+                <span id="miniLogo"></span>
+                <span class="text-sm font-semibold">BusFlow</span>
+              </div>
+              <div class="space-y-1" id="miniNav"></div>
+            </aside>
+            <div class="min-w-0">
+              <div class="grid grid-cols-2 gap-2 sm:grid-cols-4" id="miniKpis"></div>
+              <div class="mt-2 overflow-hidden rounded-lg border border-line bg-panel/50">
+                <div class="flex items-center justify-between border-b border-line px-4 py-2.5">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-mid">Live fleet control</p>
+                  <span class="status-badge status-running"><span class="dot"></span>6 buses</span>
+                </div>
+                <div id="miniMap" class="aspect-[16/8] w-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ 11 · FINAL CTA ══════════════════ -->
+    <section class="relative overflow-hidden border-t border-line py-24">
+      <div class="pointer-events-none absolute inset-0 bg-dots opacity-40" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute bottom-[-40%] left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-3xl px-5 text-center sm:px-8" data-reveal>
+        <p class="kicker justify-center"><span class="dot"></span>Ready when you are</p>
+        <h2 class="display mt-4 text-4xl sm:text-5xl">Your campus. Your route.<br class="hidden sm:block" /> Always connected.</h2>
+        <p class="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-mid">
+          Sign in as any of the five roles and walk the complete journey — from a QR scan on the bus to
+          the attendance figure on the administrator's screen.
+        </p>
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <a class="btn-primary btn-lg" href="login.html">Sign In
+            <i data-icon="arrowRight" data-icon-class="h-4 w-4"></i></a>
+          <a class="btn-secondary btn-lg" href="pages/student.html">See the student app</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="border-t border-line bg-ink/60">
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div>
+        <div class="flex items-center gap-2.5">
+          <span id="footLogo"></span>
+          <span class="text-[15px] font-semibold tracking-[-0.02em]">BusFlow</span>
+        </div>
+        <p class="mt-4 max-w-xs text-sm leading-relaxed text-mute">
+          College transportation management system. Frontend prototype — the production build runs on a
+          C++ OOP + DSA engine.
+        </p>
+        <p class="mt-5 font-mono text-[10px] uppercase tracking-[0.16em] text-faint">Graphic Era Hills University · Bhimtal</p>
+      </div>
+      <nav aria-label="Product">
+        <p class="mono-label">Product</p>
+        <ul class="mt-4 space-y-2.5 text-sm text-mute">
+          <li><a class="transition-colors hover:text-hi" href="#fleet">Live fleet</a></li>
+          <li><a class="transition-colors hover:text-hi" href="#tracking">Tracking</a></li>
+          <li><a class="transition-colors hover:text-hi" href="#pass">Digital pass</a></li>
+          <li><a class="transition-colors hover:text-hi" href="#routes">Smart routes</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Dashboards">
+        <p class="mono-label">Dashboards</p>
+        <ul class="mt-4 space-y-2.5 text-sm text-mute">
+          <li><a class="transition-colors hover:text-hi" href="pages/admin.html">Admin</a></li>
+          <li><a class="transition-colors hover:text-hi" href="pages/student.html">Student</a></li>
+          <li><a class="transition-colors hover:text-hi" href="pages/parent.html">Parent</a></li>
+          <li><a class="transition-colors hover:text-hi" href="pages/driver.html">Driver</a></li>
+          <li><a class="transition-colors hover:text-hi" href="pages/conductor.html">Conductor</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Engineering">
+        <p class="mono-label">Engineering</p>
+        <ul class="mt-4 space-y-2.5 text-sm text-mute">
+          <li class="flex items-center gap-2"><span class="dot text-accent"></span>Graph + Dijkstra</li>
+          <li class="flex items-center gap-2"><span class="dot text-accent"></span>Hash map lookup</li>
+          <li class="flex items-center gap-2"><span class="dot text-accent"></span>Event queue</li>
+          <li class="flex items-center gap-2"><span class="dot text-accent"></span>Sorted reports</li>
+        </ul>
+      </nav>
     </div>
-  </div>
-</div>
+    <div class="border-t border-line">
+      <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-5 sm:px-8">
+        <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">© 2026 BusFlow · Student project prototype</p>
+        <div class="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
+          <span>Mock data</span><span>No backend required</span>
+          <button class="transition-colors hover:text-mid" id="resetDemo">Reset demo</button>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-<script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/qr.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/fleetmap.js"></script>
+  <script src="js/landing.js"></script>
 </body>
 </html>

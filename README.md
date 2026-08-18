@@ -1,156 +1,217 @@
-# CampusTransit — College Bus Management System (Frontend)
+# BusFlow — College Transportation Management System
 
-A production-styled frontend prototype for a college bus management system.
-HTML5 + Tailwind CSS v4 (CLI, not CDN) + vanilla JavaScript. No frameworks.
+A presentation-ready **frontend prototype** of BusFlow: a digital transportation platform that
+connects students, parents, drivers, conductors and college administrators on one live network.
+
+Built with **HTML5 + Tailwind CSS (Tailwind CLI) + Vanilla JavaScript**.
+No React, no Vue, no Bootstrap, no Tailwind CDN, no backend required.
+
+The production system is planned to run on a **C++ (OOP + DSA)** engine — this repository is the
+interface layer, with the backend simulated in JavaScript using centralised mock data.
 
 ---
 
-## 1. Folder structure
+## 1. Quick start
 
-```text
-college-bus-management/
-│
-├── index.html                  # Login / role-selection page
+```bash
+# 1 · install the Tailwind CLI (only dependency)
+npm install
+
+# 2 · build the stylesheet once
+npm run build
+
+#    …or rebuild automatically while editing
+npm run dev
+
+# 3 · serve the folder (any static server works)
+npx serve .
+#    or:  python3 -m http.server 8080
+```
+
+Then open <http://localhost:8080/index.html>.
+
+> `dist/output.css` is already committed, so the prototype also works by simply opening
+> `index.html` in a browser — no build step needed for the demo.
+
+The exact Tailwind command required by the brief:
+
+```bash
+npx @tailwindcss/cli -i ./css/input.css -o ./dist/output.css --watch
+```
+
+---
+
+## 2. Project structure
+
+```
+BusFlow/
+├── index.html             # Landing page (hero network visual + 11 sections)
+├── login.html             # Role gateway (mock authentication)
 │
 ├── pages/
-│   ├── admin-dashboard.html
-│   ├── student-dashboard.html
-│   ├── parent-dashboard.html
-│   ├── driver-dashboard.html
-│   └── conductor-dashboard.html
+│   ├── admin.html         # Control center: 13 modules
+│   ├── student.html       # Student app
+│   ├── parent.html        # Parent app
+│   ├── driver.html        # Driver console
+│   └── conductor.html     # Conductor QR scanner
 │
 ├── css/
-│   └── input.css               # Tailwind v4 source (@theme tokens + @utility/@apply components)
+│   └── input.css          # Design tokens + @apply component layer
+├── dist/
+│   └── output.css         # Tailwind CLI output (generated)
 │
 ├── js/
-│   ├── mock-data.js             # Centralized mock data (buses, students, routes, etc.)
-│   ├── layout.js                # Builds the responsive sidebar/topbar shell per page
-│   ├── app.js                   # Shared utilities: modals, toasts, notifications, search, sidebar
-│   ├── auth.js                  # Login page: role selection + mock authentication
-│   ├── admin.js                 # Admin dashboard routing + rendering
-│   ├── student.js               # Student dashboard routing + rendering
-│   ├── parent.js                # Parent dashboard routing + rendering
-│   ├── driver.js                # Driver dashboard routing + rendering
-│   └── conductor.js             # Conductor dashboard routing + rendering (QR scan simulation)
+│   ├── data.js            # Centralised mock data + reactive store  ← single source of truth
+│   ├── app.js             # UI kit: icons, toasts, modals, drawer, shell, palette, simulation
+│   ├── components.js      # Shared renderers (KPI, bus card, timeline, pass, charts, states)
+│   ├── fleetmap.js        # SVG live transport-network visualisation
+│   ├── qr.js              # Deterministic QR-style pass renderer
+│   ├── landing.js         # Landing page behaviour
+│   ├── login.js           # Role selection + session
+│   ├── admin.js           # Admin console views
+│   ├── student.js         # Student app views
+│   ├── parent.js          # Parent app views
+│   ├── driver.js          # Driver console views
+│   └── conductor.js       # Conductor scanner views
 │
 ├── assets/
-│   ├── images/
-│   └── icons/
-│
-├── dist/
-│   └── output.css              # Compiled Tailwind CSS (generated — don't edit directly)
-│
+│   └── favicon.svg
 ├── package.json
 └── README.md
 ```
 
 ---
 
-## 2. Tailwind CLI commands
+## 3. Design system
 
-Install dependencies (already done if you received this project with `node_modules`; otherwise):
+Everything reusable lives in `css/input.css`; one-off layout stays as Tailwind utilities in the HTML.
 
-```bash
-npm install
-```
+**Tokens** (`@theme`)
 
-Build CSS once (minified, production):
+| Group | Token | Value |
+|---|---|---|
+| Background | `--color-void` | `#06070a` |
+| Surface | `--color-panel` / `--color-panel-2` | `#0f1218` / `#141821` |
+| Line | `--color-line` / `--color-line-2` | `#1c222c` / `#262e3a` |
+| Text | `--color-hi` / `--color-mid` / `--color-mute` | `#f2f5f9` / `#a5aebd` / `#6f7a8b` |
+| Accent | `--color-accent` / `--color-accent-2` | `#22d3ee` / `#3b82f6` |
+| Status | `ok` / `warn` / `bad` / `violet` | `#34d399` / `#fbbf24` / `#fb7185` / `#a78bfa` |
+| Type | `--font-sans` / `--font-mono` | Sora / JetBrains Mono |
+| Motion | `--ease-premium` | `cubic-bezier(0.16, 1, 0.3, 1)` |
 
-```bash
-npm run build
-```
+**Component classes built with `@apply`**
 
-Watch mode while developing (rebuilds `dist/output.css` on save):
+`btn` · `btn-primary` · `btn-secondary` · `btn-ghost` · `btn-danger` · `btn-icon` · `card` ·
+`card-pad` · `card-hover` · `stat-card` · `stat-value` · `stat-label` · `status-badge`
+(+ `status-running/-delayed/-arrived/-idle/-alert/-pending`) · `chip` · `live-dot` ·
+`input-field` · `field-label` · `switch` · `sidebar-item` · `nav-item` · `tab` ·
+`table-container` · `modal` (+ head/body/foot) · `drawer` · `toast` · `timeline` / `tl-node` ·
+`skeleton` · `empty-state` · `section-title` · `kicker` · `mono-label`
 
-```bash
-npm run watch
-```
-
-Both scripts wrap the underlying Tailwind CLI command:
-
-```bash
-npx tailwindcss -i ./css/input.css -o ./dist/output.css --minify
-```
-
----
-
-## 3. Running the project locally
-
-No build server is required to view pages — everything reads from static
-files and `dist/output.css`.
-
-1. Run `npm install` once to get Tailwind CLI.
-2. Run `npm run build` (or `npm run watch` while editing styles).
-3. Open `index.html` directly in a browser, **or** serve the folder so
-   relative paths behave identically to a real deployment:
-
-   ```bash
-   npx serve .
-   # or
-   python3 -m http.server 8080
-   ```
-
-4. From the login page, pick a role and sign in with any password
-   (mock authentication) — you'll be redirected to that role's dashboard:
-
-   | Role       | Email                |
-   |------------|-----------------------|
-   | Admin      | admin@college.edu     |
-   | Student    | student@college.edu   |
-   | Parent     | parent@college.edu    |
-   | Driver     | driver@college.edu    |
-   | Conductor  | conductor@college.edu |
+Utilities: `bg-grid`, `bg-dots`, `mask-fade-b`, `text-gradient`, `glow-accent`, `stagger`.
 
 ---
 
-## 4. Architecture notes
+## 4. How the prototype stays connected
 
-- **No frameworks.** Every dashboard is a single HTML file containing
-  `<template>` blocks for each in-page "section" (e.g. Admin has
-  Dashboard/Fleet/Routes/Attendance/Leaves/Complaints). A tiny hash-based
-  router (`#fleet`, `#routes`, ...) swaps the active template into
-  `#mainContent` and re-renders it from `window.__BUS_DB__`, avoiding a
-  full page reload per section while staying framework-free.
+`js/data.js` holds one store (`BusFlow.state`) with buses, routes, stops, students, drivers,
+conductors, attendance, notifications, leave requests and complaints. Actions mutate that store,
+persist to `localStorage` and emit events; every screen subscribes.
 
-- **Shared shell.** `layout.js` generates the sidebar, topbar (search,
-  notifications, profile menu) and mobile drawer once per page via
-  `renderShell()`, so every dashboard shares identical responsive
-  behavior. `app.js` then wires up interactivity (sidebar toggle,
-  dropdowns, toast/modal systems, global search, live-tracking ticker).
-  Script load order matters: `mock-data.js → layout.js → app.js →
-  <role>.js` — the role script calls `renderShell()` first, then the
-  shared init functions, so elements exist before listeners attach.
+So a single QR scan on the conductor screen results in:
 
-- **Centralized mock data.** `mock-data.js` defines one `DB` object
-  (buses, students, drivers, conductors, routes, leave requests,
-  complaints, notifications) attached to `window.__BUS_DB__`, mutated
-  in place by page interactions (e.g. approving a leave request,
-  marking QR attendance) so state stays consistent within a session.
+```
+conductor scans pass
+   ↓ BusFlow.actions.markAttendance()
+attendance record created  →  student.boarded = true
+   ↓
+bus occupancy +1           →  driver console + control center update
+   ↓
+notification queued        →  parent app + toast + notification drawer
+   ↓
+admin KPI (attendance %)   →  dashboard counters refresh
+```
 
-- **Responsive strategy.** Sidebar is a fixed off-canvas drawer under
-  `lg` (hamburger button + overlay + slide-in) and a static in-flow
-  column at `lg` and above (with a collapse-to-icons toggle). Tables
-  scroll horizontally on narrow viewports instead of breaking layout.
-  KPI/grid layouts step from 2 → 3 → 6 columns across breakpoints.
-
-- **Design system.** `css/input.css` defines design tokens via
-  Tailwind v4's `@theme` (colors, fonts, shadows) and reusable
-  component classes via `@utility` (composable base classes like
-  `.btn`, `.card`, `.badge`, `.input`, `.sidebar-link`) plus `@layer
-  components` for variants built with `@apply` on top of them.
-
-- **Ready for a backend.** Every write action (add bus, approve leave,
-  mark attendance, send SOS, report emergency) currently mutates the
-  in-memory mock DB and shows a toast — these are the exact seams
-  where a C++/DSA or REST backend would plug in later (replace the
-  mutation + toast with a `fetch()` call and re-render on response).
+A small simulation engine (`BusFlow.ui.sim`) advances bus positions, recalculates ETA and emits
+occasional delay/arrival events every 2.6 s. Pause it from the admin footer or Settings.
 
 ---
 
-## 5. Known scope notes
+## 5. Presentation flow (demo script)
 
-This is the frontend deliverable only. A few backend-dependent
-affordances (edit bus, delete bus, GPS-based live map, reports export)
-are intentionally stubbed with a toast or "Module coming soon" empty
-state rather than faked with more mock data, to keep it obvious what
-still needs a real API.
+Click the ✨ button in any dashboard topbar for this list with jump links.
+
+1. **`login.html`** — choose a role (session is shared across pages).
+2. **Student → Home** — BUS-07, live ETA, next stop.
+3. **Student → Live Tracking** — bus moving along Route A, stop-by-stop.
+4. **Student → Bus Pass** — the QR pass the conductor scans.
+5. **Conductor → Scan** — pick *Mitul Upadhyay*, scan, **Mark attendance**.
+6. **Parent → Overview / Journey** — boarding alert + timeline turn green.
+7. **Driver → Trip** — occupancy rose; broadcast *Delayed* or *Arrived*.
+8. **Admin → Dashboard / Attendance** — the same event in the KPIs and records.
+
+Reset before presenting: **Admin → Settings → Reset attendance** (or the *Reset demo* link in the
+landing page footer).
+
+Handy shortcuts: `Ctrl/⌘ + K` instant lookup · `Esc` closes modals/drawers.
+
+---
+
+## 6. Feature map
+
+| Area | Where |
+|---|---|
+| Landing hero network visual | `index.html` + `js/fleetmap.js` |
+| Live fleet control center | Admin → Live Tracking |
+| Fleet CRUD (view / edit / assign / delete + Add bus modal) | Admin → Fleet |
+| Route timeline (completed / current / upcoming) | Admin → Routes, all apps |
+| Instant student lookup (hash-map story) | Admin → Students, `Ctrl K` palette |
+| Sorted attendance + reports | Admin → Attendance / Reports |
+| Approvals & complaints | Admin → Leave Requests / Complaints |
+| QR attendance workflow | Conductor → Scan |
+| Digital bus pass | Student → Bus Pass, landing §Digital pass |
+| Journey timeline & alerts | Parent → Overview / Journey |
+| Trip controls & status broadcast | Driver → Trip |
+| Emergency SOS | Student → SOS, Driver → Emergency |
+| Loading / empty / error states | Skeletons on first paint, empty states in every list |
+
+---
+
+## 7. Accessibility & motion
+
+* Semantic landmarks (`header`, `nav`, `main`, `aside`, `footer`), skip links, labelled controls.
+* Full keyboard support: focus-visible rings, focus trap in modals, `Esc` to close, arrow keys in
+  the command palette, `Enter`/`Space` on custom switches and the SOS button.
+* `aria-current`, `aria-selected`, `aria-expanded`, `role="dialog"`, `aria-live` toasts.
+* `prefers-reduced-motion: reduce` disables animation (map interpolation, counters, transitions)
+  while keeping every feature working.
+
+---
+
+## 8. DSA hooks for the C++ backend
+
+The UI already exposes the surfaces the algorithms will power:
+
+| Structure | Surface in the UI |
+|---|---|
+| Graph + Dijkstra | Route optimiser → "Shortest route calculated · 4.2 ms" |
+| Hash map | Instant student/bus lookup (`Ctrl K`, Students search) |
+| Queue | Notification event stream / drawer |
+| Sorting | Attendance & report sorting (time / name / bus, punctuality) |
+| Binary search | Sorted attendance record retrieval |
+| Stack / BFS / DFS | Trip history and stop-network traversal |
+| Vector / Array | Fleet, roster and manifest collections |
+
+Replacing the mock layer means swapping `js/data.js` for a thin fetch/WebSocket adapter that
+returns the same shapes — no UI changes required.
+
+---
+
+## 9. Notes
+
+* Mock data only. No real authentication, GPS, database or payments — by design.
+* Fonts load from Google Fonts; offline they fall back to the system sans/mono stack.
+* Tested in current Chrome/Edge/Firefox/Safari. Layouts: mobile (bottom nav), tablet
+  (collapsible sidebar), desktop (full control center).
+
+© 2026 BusFlow · student project prototype · Graphic Era Hills University, Bhimtal.
