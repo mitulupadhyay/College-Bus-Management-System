@@ -8,7 +8,13 @@
     "build": "npx @tailwindcss/cli -i ./css/input.css -o ./dist/output.css --minify",
     "serve": "npx serve ."
   },
-  "keywords": ["tailwindcss", "vanilla-js", "prototype", "college-project", "transportation"],
+  "keywords": [
+    "tailwindcss",
+    "vanilla-js",
+    "prototype",
+    "college-project",
+    "transportation"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3"

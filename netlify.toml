@@ -1,0 +1,20 @@
+# Netlify deployment — BusFlow is a static site; the build step only
+# regenerates the Tailwind stylesheet (dist/output.css is committed too,
+# so the site also deploys with no build command at all).
+
+[build]
+  command = "npm run build"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/dist/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"

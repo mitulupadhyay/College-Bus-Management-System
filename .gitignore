@@ -1,3 +1,7 @@
 node_modules/
 .DS_Store
 *.log
+
+# NOTE: dist/output.css is intentionally committed.
+# It lets the prototype run by simply opening index.html, and lets any
+# static host (Vercel / Netlify / GitHub Pages) deploy with no build step.

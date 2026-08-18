@@ -207,7 +207,55 @@ returns the same shapes — no UI changes required.
 
 ---
 
-## 9. Notes
+## 9. Deployment (Vercel / Netlify / GitHub Pages)
+
+BusFlow is a **plain static site** — relative paths only, no server code, no environment
+variables, no API routes. `dist/output.css` is committed, so it deploys even with **no build
+step**; the build command below simply regenerates a minified stylesheet.
+
+### Vercel (recommended)
+
+```bash
+npm i -g vercel      # once
+vercel               # preview deploy
+vercel --prod        # production
+```
+
+Or import the repository at <https://vercel.com/new>. `vercel.json` is included, so the correct
+settings are picked up automatically:
+
+| Setting | Value |
+|---|---|
+| Framework preset | Other (`"framework": null`) |
+| Install command | `npm install` |
+| Build command | `npm run build` |
+| Output directory | `.` (the repo root — **not** `public`) |
+
+> Deploying with **no build** also works: set the build command to *None* / leave it empty and
+> the committed `dist/output.css` is served as-is.
+
+Routes after deploy: `/`, `/login.html`, `/pages/admin.html`, `/pages/student.html`,
+`/pages/parent.html`, `/pages/driver.html`, `/pages/conductor.html`.
+
+### Netlify
+
+`netlify.toml` is included (`command = "npm run build"`, `publish = "."`), or drag-and-drop the
+extracted folder onto <https://app.netlify.com/drop>.
+
+### GitHub Pages
+
+Push the folder to a repo and enable Pages → *Deploy from branch* → `main` / `root`.
+Every link is relative, so it works from a project sub-path such as
+`https://<user>.github.io/busflow/`. A `.nojekyll` file is included.
+
+### Anything else
+
+Cloudflare Pages, Render, Firebase Hosting, Surge, or a plain college web server: upload the
+folder, point the document root at it. Nothing else is required.
+
+---
+
+## 10. Notes
 
 * Mock data only. No real authentication, GPS, database or payments — by design.
 * Fonts load from Google Fonts; offline they fall back to the system sans/mono stack.
